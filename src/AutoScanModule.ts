@@ -9,7 +9,7 @@ import { join } from 'path';
 @Module({})
 export class AutoScanModule {
   static async scan(): Promise<DynamicModule> {
-    const root = join(__dirname, '../../..');
+    const root = join(__dirname, '../');
 
     const controllerFiles = glob.sync(
       join(root, 'packages/**/src/*Controller.{ts,js}')
