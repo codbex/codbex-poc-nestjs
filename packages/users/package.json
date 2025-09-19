@@ -5,9 +5,9 @@
   "main": "src/index.ts",
   "dependencies": {
     "@nestjs/common": "^11.1.0",
-    "uuid": "^8.3.2"
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "@types/uuid": "^8.3.4"
+    "@types/uuid": "^13.0.0"
   }
 }
