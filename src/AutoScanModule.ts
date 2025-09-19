@@ -12,21 +12,25 @@ export class AutoScanModule {
     const root = join(__dirname, '../');
 
     const controllerFiles = glob.sync(
-      join(root, 'packages/**/src/*Controller.{ts,js}')
+      join(root, 'registry/**/src/*Controller.{ts,js}'),
     );
     const serviceFiles = glob.sync(
-      join(root, 'packages/**/src/*Service.{ts,js}')
+      join(root, 'registry/**/src/*Service.{ts,js}'),
     );
 
-    const controllers: Type<any>[] = await Promise.all(controllerFiles.map(async (f) => {
-      const mod = await import(f);
-      return mod.default || Object.values(mod)[0];
-    }));
+    const controllers: Type<any>[] = await Promise.all(
+      controllerFiles.map(async (f) => {
+        const mod = await import(f);
+        return mod.default || Object.values(mod)[0];
+      }),
+    );
 
-    const providers: Type<any>[] = await Promise.all(serviceFiles.map(async (f) => {
-      const module = await import(f);
-      return module.default || Object.values(module)[0];
-    }));
+    const providers: Type<any>[] = await Promise.all(
+      serviceFiles.map(async (f) => {
+        const module = await import(f);
+        return module.default || Object.values(module)[0];
+      }),
+    );
 
     return {
       module: AutoScanModule,
