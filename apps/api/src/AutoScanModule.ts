@@ -12,10 +12,10 @@ export class AutoScanModule {
     const root = join(__dirname, '../../..');
 
     const controllerFiles = glob.sync(
-      join(root, 'packages/**/src/*.controller.{ts,js}')
+      join(root, 'packages/**/src/*Controller.{ts,js}')
     );
     const serviceFiles = glob.sync(
-      join(root, 'packages/**/src/*.service.{ts,js}')
+      join(root, 'packages/**/src/*Service.{ts,js}')
     );
 
     const controllers: Type<any>[] = await Promise.all(controllerFiles.map(async (f) => {

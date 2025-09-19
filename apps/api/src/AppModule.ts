@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AutoScanModule } from './auto-scan.module';
+import { AutoScanModule } from './AutoScanModule';
 
 @Module({
   imports: [AutoScanModule.scan()],
