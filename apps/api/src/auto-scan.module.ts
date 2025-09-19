@@ -2,14 +2,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-// packages/auto-scan/src/auto-scan.module.ts
 import { Module, DynamicModule, Type } from '@nestjs/common';
 import * as glob from 'glob';
 import { join } from 'path';
 
 @Module({})
 export class AutoScanModule {
-  static scan(): DynamicModule {
+  static async scan(): Promise<DynamicModule> {
     const root = join(__dirname, '../../..'); // adjust to repo root if needed
 
     const controllerFiles = glob.sync(
@@ -20,15 +19,15 @@ export class AutoScanModule {
     );
 
     console.log(`controllerFiles: ${controllerFiles}`);
-    const controllers: Type<any>[] = controllerFiles.map((f) => {
-      const mod = require(f);
+    const controllers: Type<any>[] = await Promise.all(controllerFiles.map(async (f) => {
+      const mod = await import(f);
       return mod.default || Object.values(mod)[0];
-    });
+    }));
 
-    const providers: Type<any>[] = serviceFiles.map((f) => {
-      const mod = require(f);
+    const providers: Type<any>[] = await Promise.all(serviceFiles.map(async (f) => {
+      const mod = await import(f);
       return mod.default || Object.values(mod)[0];
-    });
+    }));
 
     return {
       module: AutoScanModule,

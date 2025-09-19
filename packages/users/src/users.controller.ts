@@ -1,4 +1,3 @@
-// packages/verticals/users/src/users.controller.ts
 import { Controller, Get } from '@nestjs/common';
 import { UsersService } from './users.service';
 
