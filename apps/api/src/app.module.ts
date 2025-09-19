@@ -1,9 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AutoScanModule } from './auto-scan.module'; // use TS path alias or relative path
+import { AutoScanModule } from './auto-scan.module';
 
 @Module({
-  imports: [
-    AutoScanModule.scan(), // Dynamically load all vertical controllers/services
-  ],
+  imports: [AutoScanModule.scan()],
 })
-export class AppModule {}
+export class AppModule { }

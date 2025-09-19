@@ -9,7 +9,7 @@ import { join } from 'path';
 @Module({})
 export class AutoScanModule {
   static async scan(): Promise<DynamicModule> {
-    const root = join(__dirname, '../../..'); // adjust to repo root if needed
+    const root = join(__dirname, '../../..');
 
     const controllerFiles = glob.sync(
       join(root, 'packages/**/src/*.controller.{ts,js}')
@@ -18,15 +18,14 @@ export class AutoScanModule {
       join(root, 'packages/**/src/*.service.{ts,js}')
     );
 
-    console.log(`controllerFiles: ${controllerFiles}`);
     const controllers: Type<any>[] = await Promise.all(controllerFiles.map(async (f) => {
       const mod = await import(f);
       return mod.default || Object.values(mod)[0];
     }));
 
     const providers: Type<any>[] = await Promise.all(serviceFiles.map(async (f) => {
-      const mod = await import(f);
-      return mod.default || Object.values(mod)[0];
+      const module = await import(f);
+      return module.default || Object.values(module)[0];
     }));
 
     return {
