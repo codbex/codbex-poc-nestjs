@@ -1,5 +1,5 @@
 {
-  "name": "@verticals/users",
+  "name": "@codbex/codbex-poc-nestjs-users",
   "version": "1.0.0",
   "private": true,
   "main": "src/index.ts",
