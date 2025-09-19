@@ -1,0 +1,14 @@
+{
+  "name": "@codbex/codbex-poc-nestjs-common-utils",
+  "version": "1.0.0",
+  "main": "build/index",
+  "types": "build/index",
+  "dependencies": {
+    "@nestjs/common": "^11.1.0"
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}

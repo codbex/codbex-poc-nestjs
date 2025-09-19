@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { Utils } from '../../common-utils/src/Utils';
 
 @Controller('users')
 export class UsersController {
@@ -7,6 +8,6 @@ export class UsersController {
 
   @Get()
   getUsers() {
-    return this.usersService.findAll();
+    return [Utils.getMessage(), ...this.usersService.findAll()];
   }
 }
